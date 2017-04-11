@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-zombie/zombie/lib/dom/forms.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-zombie">npmtest-zombie (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-zombie/zombie/lib/dom/forms.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">15.38% <small>(22 / 143)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 85)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">17.19% <small>(22 / 128)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-zombie/zombie/lib/dom/</a> &#187; forms.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Patches to JSDOM for properly handling forms.
+'use strict';
+&nbsp;
+var _Map = require('babel-runtime/core-js/map')['default'];
+&nbsp;
+var _Array$from = require('babel-runtime/core-js/array/from')['default'];
+&nbsp;
+var _Object$assign = require('babel-runtime/core-js/object/assign')['default'];
+&nbsp;
+var DOM = require('./index');
+var File = require('fs');
+var Mime = require('mime');
+var Path = require('path');
+&nbsp;
+// The Form
+// --------
+&nbsp;
+// Forms convert INPUT fields of type file into this object and pass it as
+// parameter to resource request.
+//
+// The base class is a String, so the value (e.g. when passed in a GET request)
+// is the base filename.  Additional properties include the MIME type (`mime`),
+// the full filename (`filename`) and the `read` method that returns the file
+// contents.
+<span class="fstat-no" title="function not covered" >function uploadedFile(filename) {</span>
+<span class="cstat-no" title="statement not covered" >  var file = {</span>
+    valueOf: <span class="fstat-no" title="function not covered" >function valueOf() {</span>
+<span class="cstat-no" title="statement not covered" >      return Path.basename(filename);</span>
+    }
+  };
+<span class="cstat-no" title="statement not covered" >  file.filename = filename;</span>
+<span class="cstat-no" title="statement not covered" >  file.mime = Mime.lookup(filename);</span>
+<span class="cstat-no" title="statement not covered" >  file.read = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    return File.readFileSync(filename);</span>
+  };
+<span class="cstat-no" title="statement not covered" >  return file;</span>
+}
+&nbsp;
+// Implement form.submit such that it actually submits a request to the server.
+// This method takes the submitting button so we can send the button name/value.
+DOM.HTMLFormElement.prototype.submit = <span class="fstat-no" title="function not covered" >function (button) {</span>
+<span class="cstat-no" title="statement not covered" >  var form = this;</span>
+<span class="cstat-no" title="statement not covered" >  var document = form.ownerDocument;</span>
+<span class="cstat-no" title="statement not covered" >  var params = new _Map();</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function addFieldValues(fieldName, values) {</span>
+<span class="cstat-no" title="statement not covered" >    var current = params.get(fieldName) || [];</span>
+<span class="cstat-no" title="statement not covered" >    var next = current.concat(values);</span>
+<span class="cstat-no" title="statement not covered" >    params.set(fieldName, next);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function addFieldToParams(field) {</span>
+<span class="cstat-no" title="statement not covered" >    if (field.getAttribute('disabled')) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var name = field.getAttribute('name');</span>
+<span class="cstat-no" title="statement not covered" >    if (!name) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (field.nodeName === 'SELECT') {</span>
+<span class="cstat-no" title="statement not covered" >      var selected = _Array$from(field.options).filter(<span class="fstat-no" title="function not covered" >function (option) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return option.selected;</span>
+      }).map(<span class="fstat-no" title="function not covered" >function (options) {</span>
+<span class="cstat-no" title="statement not covered" >        return options.value;</span>
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (field.multiple) <span class="cstat-no" title="statement not covered" >addFieldValues(name, selected);e</span>lse {</span>
+<span class="cstat-no" title="statement not covered" >        var value = selected.length &gt; 0 ? selected[0] : field.options.length &amp;&amp; field.options[0].value;</span>
+<span class="cstat-no" title="statement not covered" >        addFieldValues(name, [value]);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (field.nodeName === 'INPUT' &amp;&amp; (field.type === 'checkbox' || field.type === 'radio')) {</span>
+<span class="cstat-no" title="statement not covered" >      if (field.checked) {</span>
+<span class="cstat-no" title="statement not covered" >        var value = field.value || '1';</span>
+<span class="cstat-no" title="statement not covered" >        addFieldValues(name, [value]);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (field.nodeName === 'INPUT' &amp;&amp; field.type === 'file') {</span>
+<span class="cstat-no" title="statement not covered" >      if (field.value) {</span>
+<span class="cstat-no" title="statement not covered" >        var value = uploadedFile(field.value);</span>
+<span class="cstat-no" title="statement not covered" >        addFieldValues(name, [value]);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (field.nodeName === 'TEXTAREA' || field.nodeName === 'INPUT') {</span>
+<span class="cstat-no" title="statement not covered" >      if (field.type !== 'submit' &amp;&amp; field.type !== 'image') <span class="cstat-no" title="statement not covered" >addFieldValues(name, [field.value]);</span></span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function addButtonToParams() {</span>
+<span class="cstat-no" title="statement not covered" >    if (button.nodeName === 'INPUT' &amp;&amp; button.type === 'image') {</span>
+<span class="cstat-no" title="statement not covered" >      addFieldValues(button.name + '.x', ['0']);</span>
+<span class="cstat-no" title="statement not covered" >      addFieldValues(button.name + '.y', ['0']);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (button.value) <span class="cstat-no" title="statement not covered" >addFieldValues(button.name, [button.value]);</span></span>
+    } else <span class="cstat-no" title="statement not covered" >addFieldValues(button.name, [button.value]);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function submit() {</span>
+<span class="cstat-no" title="statement not covered" >    if (button &amp;&amp; button.name) <span class="cstat-no" title="statement not covered" >addButtonToParams();</span></span>
+&nbsp;
+    // Ask window to submit form, let it figure out how to handle this based on
+    // the target attribute.
+<span class="cstat-no" title="statement not covered" >    document.defaultView._submit({</span>
+      url: form.getAttribute('action') || document.location.href,
+      method: form.getAttribute('method') || 'GET',
+      encoding: form.getAttribute('enctype'),
+      params: params,
+      target: form.getAttribute('target')
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function process(index) {</span>
+<span class="cstat-no" title="statement not covered" >    var field = form.elements.item(index);</span>
+<span class="cstat-no" title="statement not covered" >    if (!field) {</span>
+<span class="cstat-no" title="statement not covered" >      submit();</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    addFieldToParams(field);</span>
+<span class="cstat-no" title="statement not covered" >    process(index + 1);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  process(0);</span>
+};
+&nbsp;
+// Replace dispatchEvent so we can send the button along the event.
+DOM.HTMLFormElement.prototype._dispatchSubmitEvent = <span class="fstat-no" title="function not covered" >function (button) {</span>
+<span class="cstat-no" title="statement not covered" >  var event = this.ownerDocument.createEvent('HTMLEvents');</span>
+<span class="cstat-no" title="statement not covered" >  event.initEvent('submit', true, true);</span>
+<span class="cstat-no" title="statement not covered" >  event._button = button;</span>
+<span class="cstat-no" title="statement not covered" >  return this.dispatchEvent(event);</span>
+};
+&nbsp;
+// Default behavior for submit events is to call the form's submit method, but we
+// also pass the submitting button.
+DOM.HTMLFormElement.prototype._eventDefaults.submit = <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >  event.target.submit(event._button);</span>
+};
+&nbsp;
+// Buttons
+// -------
+&nbsp;
+// Default behavior for clicking on inputs.
+DOM.HTMLInputElement.prototype._eventDefaults = _Object$assign({}, DOM.HTMLElement.prototype._eventDefaults);
+&nbsp;
+DOM.HTMLInputElement.prototype._eventDefaults.click = <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >  var input = event.target;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function change() {</span>
+<span class="cstat-no" title="statement not covered" >    var changeEvent = input.ownerDocument.createEvent('HTMLEvents');</span>
+<span class="cstat-no" title="statement not covered" >    changeEvent.initEvent('change', true, true);</span>
+<span class="cstat-no" title="statement not covered" >    input.dispatchEvent(changeEvent);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  switch (input.type) {</span>
+    case 'reset':
+      {
+<span class="cstat-no" title="statement not covered" >        if (input.form) <span class="cstat-no" title="statement not covered" >input.form.reset();</span></span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      }
+    case 'submit':
+      {
+<span class="cstat-no" title="statement not covered" >        if (input.form) <span class="cstat-no" title="statement not covered" >input.form._dispatchSubmitEvent(input);</span></span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      }
+    case 'image':
+      {
+<span class="cstat-no" title="statement not covered" >        if (input.form) <span class="cstat-no" title="statement not covered" >input.form._dispatchSubmitEvent(input);</span></span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      }
+    case 'checkbox':
+      {
+<span class="cstat-no" title="statement not covered" >        change();</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      }
+    case 'radio':
+      {
+<span class="cstat-no" title="statement not covered" >        if (!input.getAttribute('readonly')) {</span>
+<span class="cstat-no" title="statement not covered" >          input.checked = true;</span>
+<span class="cstat-no" title="statement not covered" >          change();</span>
+        }
+      }
+  }
+};
+&nbsp;
+// Current INPUT behavior on click is to capture sumbit and handle it, but
+// ignore all other clicks. We need those other clicks to occur, so we're going
+// to dispatch them all.
+DOM.HTMLInputElement.prototype.click = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var _this = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var input = this;</span>
+<span class="cstat-no" title="statement not covered" >  input.focus();</span>
+&nbsp;
+  // First event we fire is click event
+<span class="fstat-no" title="function not covered" >  function click() {</span>
+<span class="cstat-no" title="statement not covered" >    var clickEvent = input.ownerDocument.createEvent('HTMLEvents');</span>
+<span class="cstat-no" title="statement not covered" >    clickEvent.initEvent('click', true, true);</span>
+<span class="cstat-no" title="statement not covered" >    return input.dispatchEvent(clickEvent);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  switch (input.type) {</span>
+    case 'checkbox':
+      {
+<span class="cstat-no" title="statement not covered" >        if (input.getAttribute('readonly')) <span class="cstat-no" title="statement not covered" >break;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var original = input.checked;</span>
+<span class="cstat-no" title="statement not covered" >        input.checked = !original;</span>
+<span class="cstat-no" title="statement not covered" >        var checkResult = click();</span>
+<span class="cstat-no" title="statement not covered" >        if (checkResult === false) <span class="cstat-no" title="statement not covered" >input.checked = original;</span></span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      }
+&nbsp;
+    case 'radio':
+      {
+<span class="cstat-no" title="statement not covered" >        if (input.getAttribute('readonly')) <span class="cstat-no" title="statement not covered" >break;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (input.checked) <span class="cstat-no" title="statement not covered" >click();e</span>lse {</span>
+<span class="cstat-no" title="statement not covered" >          (<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            var radios = input.ownerDocument.querySelectorAll('input[type=radio][name=\'' + _this.getAttribute('name') + '\']');</span>
+<span class="cstat-no" title="statement not covered" >            var checked = _Array$from(radios).filter(<span class="fstat-no" title="function not covered" >function (radio) {</span></span>
+<span class="cstat-no" title="statement not covered" >              return radio.checked &amp;&amp; radio.form === _this.form;</span>
+            }).map(<span class="fstat-no" title="function not covered" >function (radio) {</span>
+<span class="cstat-no" title="statement not covered" >              radio.checked = false;</span>
+            })[0];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            input.checked = true;</span>
+<span class="cstat-no" title="statement not covered" >            var radioResult = click();</span>
+<span class="cstat-no" title="statement not covered" >            if (radioResult === false) {</span>
+<span class="cstat-no" title="statement not covered" >              input.checked = false;</span>
+<span class="cstat-no" title="statement not covered" >              _Array$from(radios).filter(<span class="fstat-no" title="function not covered" >function (radio) {</span></span>
+<span class="cstat-no" title="statement not covered" >                return radio.form === input.form;</span>
+              }).forEach(<span class="fstat-no" title="function not covered" >function (radio) {</span>
+<span class="cstat-no" title="statement not covered" >                radio.checked = radio === checked;</span>
+              });
+            }
+          })();
+        }
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      }
+&nbsp;
+    default:
+      {
+<span class="cstat-no" title="statement not covered" >        click();</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      }
+  }
+};
+&nbsp;
+// Default behavior for form BUTTON: submit form.
+DOM.HTMLButtonElement.prototype._eventDefaults.click = <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >  var button = event.target;</span>
+<span class="cstat-no" title="statement not covered" >  if (button.getAttribute('disabled')) <span class="cstat-no" title="statement not covered" >return false;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var form = button.form;</span>
+<span class="cstat-no" title="statement not covered" >  if (form) <span class="cstat-no" title="statement not covered" >return form._dispatchSubmitEvent(button);</span></span>
+};
+//# sourceMappingURL=forms.js.map
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 15:38:57 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
