@@ -1,4 +1,7 @@
-# test coverage for  [zombie (v5.0.5)](https://www.npmjs.com/package/zombie)  [![npm package](https://img.shields.io/npm/v/npmtest-zombie.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-zombie) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-zombie.svg)](https://travis-ci.org/npmtest/node-npmtest-zombie)
+# npmtest-zombie
+
+#### basic test coverage for  [zombie (v5.0.5)](https://www.npmjs.com/package/zombie)  [![npm package](https://img.shields.io/npm/v/npmtest-zombie.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-zombie) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-zombie.svg)](https://travis-ci.org/npmtest/node-npmtest-zombie)
+
 #### Insanely fast, full-stack, headless browser testing using Node.js
 
 [![NPM](https://nodei.co/npm/zombie.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/zombie)
@@ -148,7 +151,8 @@
         "prepublish": "npm test && gulp build",
         "test": "gulp lint && mocha"
     },
-    "version": "5.0.5"
+    "version": "5.0.5",
+    "bin": {}
 }
 ```
 
